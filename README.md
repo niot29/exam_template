@@ -2,12 +2,16 @@
 
 Individuell examinationsuppgift i kursen Programmering med Python.
 
-## Instruktioner
-Detta är filen `README.md`. Du ska beskriva projektet och hur man startar det. Du får ändra allt innehåll i denna.
+## Frukt Loop
 
-Byt gärna namn på projektet så att det inte heter "exam_template" när du lämnar in.
+Frukt Loop spelas i terminalen och går ut på att samla olika föremål på spelplanen.
 
-Om något i instruktionerna är oklart - fråga läraren, skriv i någon öppen Discord-kanal eller fråga en AI.
+Målet är att på ett så effektivt sätt som möjligt ta sig fram till objekten i spelet. För varje föremål som spelaren samlar in tilldelas poäng enligt följande:
+
+Frukt: 20 poäng
+Övriga föremål: 10 poäng
+
+För varje steg spelaren tar utan att plocka upp ett föremål dras 1 poäng från den totala poängen.
 
 ---
 
@@ -15,40 +19,30 @@ Om något i instruktionerna är oklart - fråga läraren, skriv i någon öppen 
 ## Starta projektet
 
 För att starta mitt projekt skriver man följande i terminalen, medan man står i projektets rotmapp.
-
+src.game - starta med  modeul "curses"
 ```commandline
 python -m src.game
 ```
 
+src.game-test - starta med modeul "curses" - ```src.game-test``` är den kör bar test version
+```commandline
+python -m src.game-test
+```
+```
+
 ## Vad jag har gjort
-Här kan du skriva vilka kriterier du har arbetat med.
+***Del Beskrivning***
 
-*Du kan använda emojis för att visa om du är klar med ett krav.* ✅❌
 
-|Version 1|Status|
-|---------|------|
-|A        | ?    |
-|B        |      |
-|C        |      |
-|D        |      |
-|E        |      |
-|F        |      |
-|G        |      |
-|H        |      |
+| **A** | Hämta X- och Y-värden från klassobjektet `g`. Dividera X- och Y-värdena för att beräkna centrum. Skicka sedan resultatet till klassen `Play`.     
 
-|Version 2|Status|
-|---------|------|
-|I        |      |
-|J        |      |
-|K        |      |
-|L        |      |
-|M        |      |
-|N        |      |
+| **B** | `directions` används för att mappa tangentnedtryckningar. Spelarens position beräknas genom att addera den nuvarande X- och Y-positionen med värdena i `directions`. Genom att hantera positionsberäkningen på detta sätt undviks kod med många `if`-/`case`-satser och villkor.                                                                                                                                                                  
 
-|Version 3|Status|
-|---------|------|
-|O        |      |
-|P        |      |
-|Q        |      |
-|R        |      |
-|S        |      |
+| **C** | Funktionen `can_move` i klassen `Player` används för att avgöra vilka ytor som inte är väggar. Varje väggobjekt motsvarar en position på spelkartan. Det totala antalet positioner på X-axeln beräknas utan att inkludera start- och slutpositionerna. Samma beräkning gäller för Y-axeln. För att spelpjäsen ska kunna flyttas måste följande villkor uppfyllas. Den nya positionen för spelpjäsen ska ligga inom minimi- och maxvärdena för både X- och Y-axeln. Om villkoret uppfylls returnerar funktionen True. 
+
+
+| **D/E/F** | Tre nya funktioner har lagts till i klassen `Pickups` <br> - `get_item_score` kontrollerar vilket föremål spelaren har plockat upp och ändrar poängen till **20** om föremålet inte är en frukt (t.ex. en `meatball`).<br>- `pickup_item` lägger de upphämtade föremålen i en lista.<br>- `pickup_print_list` skriver ut innehållet i listan.                                                                                                                                                                   
+| **G** | Om spelpjäsens nya position inte sammanfaller med ett fruktobjekt, vilket innebär att ingen frukt plockas upp, görs ett poängavdrag.                                                                                                                                                              
+
+
+| **H** |  Ny interna väggar skappas, som kontroll att spelpjasen inte skall kunna gå igenom den ny interna väggarn.

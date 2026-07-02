@@ -24,84 +24,71 @@ class GameState:
         pickups.randomize(self.g)
 
 # TODO: flytta denna till en annan fil
-def print_status(stdscr, game_grid, state):
-    stdscr.clear()
-    stdscr.addstr(0, 0, "--------------------------------------")
-    stdscr.addstr(1, 0, f"You have {state.score} points.")
-    stdscr.addstr(2, 0, str(game_grid))
-    stdscr.addstr(game_grid.height + 4, 0,
-                  "Use WASD to move, I for inventory, Q/X to quit.")
-    stdscr.refresh()
+def print_status(game_grid, state):
+    """Visa spelvärlden och antal poäng."""
+    print("--------------------------------------")
+    print(f"You have {state.score} points.")
+    print(game_grid)
+
     
 
-def start(stdscr, state):
-    curses.curs_set(0)  # Hide cursor
-
+def start(state):
     command = "a"
 
+    # Direction dictionary
     directions = {
-        "w": (0, -1),
-        "a": (-1, 0),
-        "s": (0, 1),
-        "d": (1, 0)
+        "w": (0, -1),   # up
+        "a": (-1, 0),   # left
+        "s": (0, 1),    # down
+        "d": (1, 0)     # right
     }
 
+    # Loop until the user presses Q or X
     while command not in ["q", "x"]:
-
-        print_status(stdscr, state.g, state)
-
-        key = stdscr.getch()
-
-        if key != -1:
-            command = chr(key).lower()
-
+        
         if command == "i":
-            stdscr.clear()
-            stdscr.addstr(0, 0, "Inventory:")
-            stdscr.addstr(1, 0, "--------------------")
-            for i, item in enumerate(pickups.pickup_print_list()):
-                stdscr.addstr(i + 2, 1, item.name)
-            stdscr.addstr(10, 0, "Press any key to continue...")
-            stdscr.getch()
+            #print([item.name for item in pickups.inventory])
+            #pickups.pickup_print_list()
+            pickups.pickup_print_list2()
+            
+        print_status(state.g, state)
+        command = input("Use WASD to move, Q/X to quit. ")
+        command = command.casefold()[:1]
 
+        # Handle movement
         if command in directions:
             dx, dy = directions[command]
-
+            
             if state.player.can_move(dx, dy, state.g):
-
+                # Check what's on the destination tile
                 maybe_item = state.g.get(
                     state.player.pos_x + dx,
                     state.player.pos_y + dy
                 )
-
+                
+                # Move the player
                 state.player.move(dx, dy)
 
+                # Pick up item if there is one
                 if isinstance(maybe_item, pickups.Item):
+                    
                     pickups.get_item_score(maybe_item)
                     state.score += maybe_item.value
+                    print(f"You found a {maybe_item.name}, +{maybe_item.value} points.")
                     state.g.clear(state.player.pos_x, state.player.pos_y)
-
-                    stdscr.addstr(
-                        state.g.height + 6,
-                        0,
-                        f"You found a {maybe_item.name}, +{maybe_item.value} points."
-                    )
-
                 else:
+                    print(f"The floor is lava - You will lose -1 point")
                     state.score -= 1
                     state.g.clear(state.player.pos_x, state.player.pos_y)
 
-                    stdscr.addstr(
-                        state.g.height + 6,
-                        0,
-                        "The floor is lava! -1 point."
-                    )
-
-                stdscr.refresh()
-
+                    
+    
+    # Executed when the loop ends
+    print("Thank you for playing!")
+    
 # __name__ skapas av Python och sätts till "__main__" om man startar game.py
 # direkt. Detta är för att undvika att start-funktionen körs om man importerar
 # saker från game.py i en annan fil, till exempel vid testning.
 if __name__ == "__main__":
     game_state = GameState()
-    curses.wrapper(lambda stdscr: start(stdscr, game_state))
+    start(game_state)
