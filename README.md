@@ -1,6 +1,8 @@
 # Examination
 
 Individuell examinationsuppgift i kursen Programmering med Python.
+***Det finns uppladdad en inspelade demo på spelet (exam_template.mp4)***
+
 
 ## Frukt Loop
 
