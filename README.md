@@ -36,7 +36,8 @@ python -m src.game-test
 ***Del Beskrivning***
 
 Bytt ikonen som rittar upp väggarna, för förtydliga (befinligy oikon blev lite klimpigt i Linux konsolen)
-´´´
+<br>
+´´´commandline
 #wall = "■"   # Tecken för en ogenomtränglig vägg
 wall = "|"   # Tecken för en ogenomtränglig vägg
 ´´´
