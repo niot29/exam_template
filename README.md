@@ -37,10 +37,10 @@ python -m src.game-test
 
 Bytt ikonen som rittar upp väggarna, för förtydliga (befinligy oikon blev lite klimpigt i Linux konsolen)
 <br>
-´´´commandline
+```commandline
 #wall = "■"   # Tecken för en ogenomtränglig vägg
 wall = "|"   # Tecken för en ogenomtränglig vägg
-´´´
+```
 | **A** | Hämta X- och Y-värden från klassobjektet `g`. Dividera X- och Y-värdena för att beräkna centrum. Skicka sedan resultatet till klassen `Play`.     
 
 | **B** | `directions` används för att mappa tangentnedtryckningar. Spelarens position beräknas genom att addera den nuvarande X- och Y-positionen med värdena i `directions`. Genom att hantera positionsberäkningen på detta sätt undviks kod med många `if`-/`case`-satser och villkor.                                                                                                                                                                  
