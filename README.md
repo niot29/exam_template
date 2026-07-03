@@ -41,6 +41,14 @@ Bytt ikonen som rittar upp väggarna, för förtydliga (befinligy oikon blev lit
 #wall = "■"   # Tecken för en ogenomtränglig vägg
 wall = "|"   # Tecken för en ogenomtränglig vägg
 ```
+
+***NOTIS***
+Har den versionen som köra med modulen ***"curses"*** , så har jag inte lyckas få ut event testen.
+dvs  information testen som säger om man går på lava eller vilken typ av frut som togs upp. 
+version utan modulen  ***"src.game-test"*** funkar som det skall.
+
+
+
 | **A** | Hämta X- och Y-värden från klassobjektet `g`. Dividera X- och Y-värdena för att beräkna centrum. Skicka sedan resultatet till klassen `Play`.     
 
 | **B** | `directions` används för att mappa tangentnedtryckningar. Spelarens position beräknas genom att addera den nuvarande X- och Y-positionen med värdena i `directions`. Genom att hantera positionsberäkningen på detta sätt undviks kod med många `if`-/`case`-satser och villkor.                                                                                                                                                                  
